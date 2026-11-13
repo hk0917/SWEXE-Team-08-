@@ -23,7 +23,15 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= yield %>
+    <body>
+    <header class="site-header">
+      <%= link_to "ひろしま発見！", root_path, class: "logo" %>
+      <nav>
+        <%= link_to "観光名所一覧", spots_path %>
+      </nav>
+    </header>
+    <main class="container">
+      <%= yield %>
+    </main>
   </body>
 </html>
