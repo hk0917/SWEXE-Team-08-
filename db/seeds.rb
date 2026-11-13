@@ -18,25 +18,28 @@ spots = [
   { name: "三段峡",           area: "県西部",       category: "自然", address: "広島県山県郡安芸太田町" }
 ]
 
+# 新規作成のときだけ値を入れる。すでにある行は上書きしない
 spots.each do |attrs|
-  spot = Spot.find_or_initialize_by(name: attrs[:name])
-  spot.area        = areas[attrs[:area]]
-  spot.category    = attrs[:category]
-  spot.address     = attrs[:address]
-  spot.description = "（ここに見どころの説明を書く）"
-  spot.access      = "（ここにアクセスを書く）"
-  spot.save!
+  Spot.find_or_create_by!(name: attrs[:name]) do |spot|
+    spot.area        = areas[attrs[:area]]
+    spot.category    = attrs[:category]
+    spot.address     = attrs[:address]
+    spot.description = "（ここに見どころの説明を書く）"
+    spot.access      = "（ここにアクセスを書く）"
+  end
 end
 
-# ユーザー（開発用。パスワードは本番で使わない）
-User.find_or_create_by!(email: "admin@example.com") do |u|
-  u.name = "管理者"
-  u.password = "password"
-  u.role = :admin
-end
+# ユーザー（開発・テスト環境だけ。本番では作らない）
+if Rails.env.development? || Rails.env.test?
+  User.find_or_create_by!(email: "admin@example.com") do |u|
+    u.name = "管理者"
+    u.password = "password"
+    u.role = :admin
+  end
 
-User.find_or_create_by!(email: "visitor@example.com") do |u|
-  u.name = "観光客"
-  u.password = "password"
-  u.role = :visitor
+  User.find_or_create_by!(email: "visitor@example.com") do |u|
+    u.name = "観光客"
+    u.password = "password"
+    u.role = :visitor
+  end
 end
