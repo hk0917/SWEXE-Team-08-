@@ -11,5 +11,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#top"
-  resources :spots, only: [:index, :show] #issue3,4でちゃんと実装するため、テスト段階としてonly
+  # Issue 3・4 で index / show を実装する
+  resources :spots, only: [:index, :show]
 end
