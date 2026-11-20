@@ -1,0 +1,31 @@
+<section class="hero">
+  <h1>宮島・原爆ドームの、その先へ</h1>
+  <p>広島には、まだ知らない素敵な観光地がたくさんあります。</p>
+</section>
+
+<section>
+  <h2>エリアから探す</h2>
+  <div class="area-buttons">
+    <% @areas.each do |area| %>
+      <%= link_to area.name, spots_path(area_id: area.id), class: "btn" %>
+    <% end %>
+  </div>
+</section>
+
+<section>
+  <h2>注目の観光地</h2>
+  <div class="cards">
+    <% @popular_spots.each do |spot| %>
+      <div class="card">
+        <% if spot.image_url.present? %>
+          <%= image_tag spot.image_url, alt: spot.name %>
+        <% else %>
+          <div class="no-image">画像なし</div>
+        <% end %>
+        <h3><%= link_to spot.name, spot_path(spot) %></h3>
+        <p>♡ <%= spot.wishes_total %></p>
+      </div>
+    <% end %>
+  </div>
+  <p><%= link_to "観光地をもっと見る", spots_path, class: "btn" %></p>
+</section>

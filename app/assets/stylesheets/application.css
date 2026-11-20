@@ -8,3 +8,14 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+ body { font-family: sans-serif; margin: 0; color: #222; }
+.site-header { display: flex; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid #ccc; }
+.logo { font-weight: bold; text-decoration: none; color: inherit; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+.hero { background: #eef2ff; padding: 32px 20px; border-radius: 8px; text-align: center; }
+.btn { display: inline-block; padding: 8px 14px; margin: 4px; border: 1px solid #888; border-radius: 6px; text-decoration: none; color: inherit; }
+.cards { display: flex; flex-wrap: wrap; gap: 16px; }
+.card { width: 200px; border: 1px solid #ccc; border-radius: 8px; padding: 8px; }
+.card img { width: 100%; height: 110px; object-fit: cover; }
+.no-image { height: 110px; background: #ddd; display: flex; align-items: center; justify-content: center; color: #666; }
