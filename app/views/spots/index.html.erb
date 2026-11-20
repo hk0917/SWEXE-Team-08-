@@ -1,0 +1,39 @@
+<h1>観光名所一覧</h1>
+
+<%= form_with url: spots_path, method: :get do |f| %>
+  <%= f.label :area_id, "エリア" %>
+  <%= f.select :area_id,
+        options_from_collection_for_select(@areas, :id, :name, @area_id),
+        include_blank: "すべて" %>
+
+  <%= f.label :category, "カテゴリ" %>
+  <%= f.select :category,
+        options_for_select(@categories, @category),
+        include_blank: "すべて" %>
+
+  <%= f.label :sort, "並び順" %>
+  <%= f.select :sort,
+        options_for_select(@sort_options.map { |key, label| [label, key] }, @sort) %>
+
+  <%= f.submit "絞り込む", name: nil %>
+<% end %>
+
+<% if @spots.empty? %>
+  <p>見つかりませんでした。条件を変えてみてください。</p>
+<% else %>
+  <% @spots.each do |spot| %>
+    <div class="spot-item">
+      <% if spot.image_url.to_s.start_with?("http://", "https://") %>
+        <%= image_tag spot.image_url, alt: spot.name, class: "spot-img" %>
+      <% else %>
+        <div class="spot-img spot-no-image">画像なし</div>
+      <% end %>
+      <div>
+        <h3><%= spot.name %></h3>
+        <p><%= spot.area.name %>｜<%= spot.category %></p>
+        <p><%= truncate(spot.description, length: 40, omission: "…") %></p>
+        <p>♡ <%= spot.wishes_total %></p>
+      </div>
+    </div>
+  <% end %>
+<% end %>
