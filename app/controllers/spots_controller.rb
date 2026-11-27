@@ -18,4 +18,14 @@ class SpotsController < ApplicationController
 
     @spots = (@sort == "newest" ? spots.newest : spots.popular).to_a
   end
+
+  def show
+    # 存在しないIDは RecordNotFound になり、本番では 404 になる
+    @spot         = Spot.includes(:area).find(params[:id])
+    @wishes_count = @spot.wishes.count
+    @nearby_spots = Spot.where(area_id: @spot.area_id)
+                        .where.not(id: @spot.id)
+                        .order(:id)
+                        .limit(2)
+  end
 end

@@ -1,3 +1,13 @@
 .spot-item { display: flex; gap: 12px; border: 1px solid #ccc; border-radius: 8px; padding: 8px; margin: 10px 0; }
 .spot-img { width: 100px; height: 80px; object-fit: cover; flex: none; }
 .spot-no-image { background: #ddd; color: #666; display: flex; align-items: center; justify-content: center; }
+.spot-notice { background: #fff4e5; border: 1px solid #f0b36b; border-radius: 8px; padding: 8px 12px; margin: 12px 0; }
+.spot-notice p { margin: 4px 0 0; }
+.spot-detail-img { width: 100%; max-height: 320px; object-fit: cover; border-radius: 8px; }
+.spot-detail-img.spot-no-image { height: 200px; }
+.wish-count { font-weight: bold; }
+.spot-info dt { font-weight: bold; margin-top: 8px; }
+.spot-info dd { margin: 0; }
+.nearby-spots { display: flex; gap: 16px; flex-wrap: wrap; }
+.nearby-spot { width: 140px; }
+.nearby-spot .spot-img { width: 100%; }

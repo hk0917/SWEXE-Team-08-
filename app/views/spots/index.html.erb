@@ -23,13 +23,9 @@
 <% else %>
   <% @spots.each do |spot| %>
     <div class="spot-item">
-      <% if spot.image_url.to_s.start_with?("http://", "https://") %>
-        <%= image_tag spot.image_url, alt: spot.name, class: "spot-img" %>
-      <% else %>
-        <div class="spot-img spot-no-image">画像なし</div>
-      <% end %>
+      <%= spot_image_tag(spot, "spot-img") %>
       <div>
-        <h3><%= spot.name %></h3>
+        <h3><%= link_to spot.name, spot_path(spot) %></h3>
         <p><%= spot.area.name %>｜<%= spot.category %></p>
         <p><%= truncate(spot.description, length: 40, omission: "…") %></p>
         <p>♡ <%= spot.wishes_total %></p>
