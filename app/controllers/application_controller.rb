@@ -26,6 +26,6 @@ class ApplicationController < ActionController::Base
   # 管理者だけ通す（Issue 8・9 でも使う）
   def require_admin
     return require_login unless logged_in?
-    redirect_to root_path, alert: "管理者のみアクセスできます" unless current_user.admin?
+    redirect_to root_path, alert: "管理者のみアクセスできます" unless current_user.admin?so
   end
 end
