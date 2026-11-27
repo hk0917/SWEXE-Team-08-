@@ -1,0 +1,46 @@
+<p><%= link_to "← 一覧に戻る", spots_path %></p>
+
+<h1><%= @spot.name %></h1>
+<p><%= @spot.area.name %>｜<%= @spot.category %></p>
+
+<% if @spot.notice.present? %>
+  <div class="spot-notice" role="status">
+    <strong>お知らせ</strong>
+    <p><%= @spot.notice %></p>
+  </div>
+<% end %>
+
+<%= spot_image_tag(@spot, "spot-detail-img") %>
+
+<p class="wish-count">♡ <%= @wishes_count %>人が「行きたい」と思っています</p>
+<%# Issue 6 で、ここに「ここに行きたい」ボタンを置く %>
+
+<h2>見どころ</h2>
+<%= simple_format(@spot.description) %>
+
+<h2>基本情報</h2>
+<dl class="spot-info">
+  <dt>住所</dt>
+  <dd><%= @spot.address.presence || "未登録" %></dd>
+  <dt>アクセス</dt>
+  <dd><%= @spot.access.presence || "未登録" %></dd>
+</dl>
+
+<% if @spot.official_url.present? %>
+  <p><%= link_to "公式サイトを見る", @spot.official_url, target: "_blank", rel: "noopener" %></p>
+<% end %>
+
+<h2>近くのおすすめ</h2>
+<% if @nearby_spots.empty? %>
+  <p>同じエリアの観光地は、まだ登録されていません。</p>
+<% else %>
+  <div class="nearby-spots">
+    <% @nearby_spots.each do |spot| %>
+      <div class="nearby-spot">
+        <%= spot_image_tag(spot, "spot-img") %>
+        <p><%= link_to spot.name, spot_path(spot) %></p>
+        <p><%= spot.category %></p>
+      </div>
+    <% end %>
+  </div>
+<% end %>
