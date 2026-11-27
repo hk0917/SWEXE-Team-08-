@@ -16,7 +16,11 @@
 <%# Issue 6 で、ここに「ここに行きたい」ボタンを置く %>
 
 <h2>見どころ</h2>
-<%= simple_format(@spot.description) %>
+<% if @spot.description.present? %>
+  <%= simple_format(@spot.description) %>
+<% else %>
+  <p>未登録</p>
+<% end %>
 
 <h2>基本情報</h2>
 <dl class="spot-info">
@@ -26,7 +30,7 @@
   <dd><%= @spot.access.presence || "未登録" %></dd>
 </dl>
 
-<% if @spot.official_url.present? %>
+<% if http_url?(@spot.official_url) %>
   <p><%= link_to "公式サイトを見る", @spot.official_url, target: "_blank", rel: "noopener" %></p>
 <% end %>
 
