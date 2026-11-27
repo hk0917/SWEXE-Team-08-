@@ -28,9 +28,19 @@
       <%= link_to "ひろしま発見！", root_path, class: "logo" %>
       <nav>
         <%= link_to "観光名所一覧", spots_path %>
+        <% if logged_in? %>
+          <span><%= current_user.name %> さん</span>
+          <%= link_to "管理者ページ", admin_root_path if current_user.admin? %>
+          <%= button_to "ログアウト", logout_path, method: :delete, class: "btn", form: { style: "display:inline" } %>
+        <% else %>
+          <%= link_to "ログイン", login_path %>
+          <%= link_to "新規登録", signup_path %>
+        <% end %>
       </nav>
     </header>
     <main class="container">
+      <% if notice %><p class="flash notice"><%= notice %></p><% end %>
+      <% if alert %><p class="flash alert"><%= alert %></p><% end %>
       <%= yield %>
     </main>
   </body>
