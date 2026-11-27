@@ -10,7 +10,11 @@ class Spot < ApplicationRecord
   validates :image_url,
             format: { with: %r{\Ahttps?://}i, message: "は http:// か https:// で始まるURLにしてください" },
             allow_blank: true
-
+  validates :notice, length: { maximum: 200 }
+  validates :official_url,
+            format: { with: %r{\Ahttps?://}i, message: "は http:// か https:// で始まるURLにしてください" },
+            allow_blank: true
+            
   scope :in_area,     ->(area_id)  { where(area_id: area_id) if area_id.present? }
   scope :in_category, ->(category) { where(category: category) if category.present? }
 

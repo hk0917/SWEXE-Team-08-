@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_13_023915) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_27_021724) do
   create_table "areas", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -27,6 +27,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_13_023915) do
     t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "notice"
+    t.string "official_url"
     t.index ["area_id"], name: "index_spots_on_area_id"
   end
 
